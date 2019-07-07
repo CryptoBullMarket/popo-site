@@ -55,8 +55,8 @@ class SentimentTrend extends Component{
 
             return(
                 <div className={'sentiment-trend-container chart'}>
-                    <div className='title-tag' >{string.sentimentTrend}</div>
-                    <ChartCanvas 
+                    <h2 style={{textAlign:"center"}}>{string.sentimentTrend}</h2>
+                    <ChartCanvas
                         height={height}
                         width={width}
                         ratio={3}

@@ -21,13 +21,16 @@ class Home extends Component{
     this.setChartWidth=this.setChartWidth.bind(this)
   }
   setChartWidth(){
-    if(this.sentiContainer==null || this.forecastContainer==null || this.sentiContainer==undefined || this.forecastContainer==undefined) return
-    var sentiWidth=(this.sentiContainer.clientWidth) // padding 
-    var forecastWidth=(this.forecastContainer.clientWidth) //padding
-    this.setState({
-      sentiWidth:sentiWidth,
-      forecastWidth:forecastWidth,
-    })
+    // if(this.sentiContainer==null || this.forecastContainer==null || this.sentiContainer==undefined || this.forecastContainer==undefined) return
+    if(this.sentiContainer==null || this.sentiContainer==undefined) return
+
+
+      // var forecastWidth=(this.forecastContainer.clientWidth) //padding
+      var sentiWidth=(this.sentiContainer.clientWidth) // padding
+      this.setState({
+          sentiWidth:sentiWidth,
+          // forecastWidth:forecastWidth,
+      })
   }
   componentDidMount(){
     this.setChartWidth()
@@ -49,7 +52,10 @@ class Home extends Component{
         <div className='home-left-panel'>
           <StrategyFilter/>
 	        <Trend/>
-          <Twitter count={7}/>
+            <div ref={sentiContainer=>this.sentiContainer=sentiContainer}>
+                <SentimentTrend chartWidth={this.state.sentiWidth}/>
+            </div>
+            <Twitter count={7}/>
         </div>
         <div className='home-right-panel'>
           <HomeNews type={id.news.headlines} count={9}/>
@@ -61,10 +67,10 @@ class Home extends Component{
           {/* <HomeNews type={id.news.headlines} count={9}/> */}
           {/* <FilterCoins/> */}
           {/* <Trend/> */}
-          {/* <div ref={sentiContainer=>this.sentiContainer=sentiContainer}> */}
-            {/* <SentimentTrend chartWidth={this.state.sentiWidth}/> */}
-          {/* </div> */}
-          {/* <Twitter count={7}/> */}
+           {/*<div ref={sentiContainer=>this.sentiContainer=sentiContainer}>*/}
+             {/*<SentimentTrend chartWidth={this.state.sentiWidth}/>*/}
+           {/*</div> */}
+           {/*<Twitter count={7}/>*/}
       </div>
     );
   }

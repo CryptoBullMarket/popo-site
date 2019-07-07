@@ -9,6 +9,7 @@ import GetNotified from './Module/GetNotified/GetNotified'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Presenter from './Presenter'
 import {string} from './Values/Constants'
+import SearchBar from './Module/SearchBar/SearchBar'
 
 
 class App extends Component {
@@ -42,8 +43,9 @@ class App extends Component {
           </div>
           <div className={'main-body'}>
               <Switch>
+                <Route exact path='/test' render={(props)=>(<SearchBar setNavbarTab={this.setNavbarTab}/>)}/>
                 <Route exact path='/' render={(props)=>(<Home setNavbarTab={this.setNavbarTab}/>)}/>
-                <Route exact path={`/${string.navbar.url.favourites}&f=:coin&t=:tab`} render={(props)=>(<CoinDetail from={props.match.params.coin} to={props.match.params.tab}/>)}/> 
+                <Route exact path={`/${string.navbar.url.favourites}&f=:coin&t=:tab`} render={(props)=>(<CoinDetail from={props.match.params.coin} to={props.match.params.tab}/>)}/>
                 <Route exact path='/coinList' render={(props)=>(<CoinList setNavbarTab={this.setNavbarTab}/>)}/>
                 <Route exact path='/feed' render={(props)=>(<Feed setNavbarTab={this.setNavbarTab}/>)}/>
                 <Route exact path='/notify' render={(props)=>(<GetNotified setNavbarTab={this.setNavbarTab}/>)}/>

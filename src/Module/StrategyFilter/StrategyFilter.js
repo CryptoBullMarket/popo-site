@@ -5,6 +5,7 @@ import Loading from '../Loading/Loading'
 import CandleChart from '../../Utils/CandleChart';
 import StrategyContainer from './ViewHolder/StrategyContainer';
 import Presenter from './Presenter'
+import SearchBar from "../SearchBar/SearchBar";
 
 class StrategyFilter extends Component{
     constructor(props){
@@ -48,18 +49,20 @@ class StrategyFilter extends Component{
 
     }
     render(){
-        if(this.strategyData.length==0){ 
+        // console.log(this.strategyData)
+        if(this.strategyData.length==0){
             return <Loading isLoading={true}/>
         }
         return(
             <div className='strategyFilter-container'>
-                <h2 style={{textAlign:"center"}}>Strategy Filter</h2>
-                {this.state.isLoading?<Loading isLoading={true}/>:""}
+                {<SearchBar data={this.strategyData}/>}
+                {/*<h2 style={{textAlign:"center"}}>Strategy Filter</h2>*/}
+                {/*{this.state.isLoading?<Loading isLoading={true}/>:""}*/}
                 
-                <div className='strategyFilter-item-title'>{this.state.selectedKey.name} - {this.state.selectedKey.from}/{this.state.selectedKey.to} <span className='i-info' onClick={()=>this.openStrategyDetail()}/></div>
-                {this.state.selectedKey.window.map((item)=><span className={`chart_timeframe_item ${this.state.showWindow==item?'active':''}`} onClick={()=>this.setWindowSelection(item)}>{item} </span>)}
-                {this.state.chartData.length>0?<CandleChart className='pointer' windowFrame={this.state.showWindow} data={this.state.chartData} zoom={false} pan={false} onClick={()=>this.openCandleStickChart()}/>:''}
-                {this.strategyData.map((item)=><StrategyContainer data={item} selectedKey={this.state.selectedKey} setSelection={(name,from,to,window, pairData)=>this.setSelection(name,from,to,window, pairData)} />)}
+                {/*<div className='strategyFilter-item-title'>{this.state.selectedKey.name} - {this.state.selectedKey.from}/{this.state.selectedKey.to} <span className='i-info' onClick={()=>this.openStrategyDetail()}/></div>*/}
+                {/*{this.state.selectedKey.window.map((item)=><span className={`chart_timeframe_item ${this.state.showWindow==item?'active':''}`} onClick={()=>this.setWindowSelection(item)}>{item} </span>)}*/}
+                {/*{this.state.chartData.length>0?<CandleChart className='pointer' windowFrame={this.state.showWindow} data={this.state.chartData} zoom={false} pan={false} onClick={()=>this.openCandleStickChart()}/>:''}*/}
+                {/*{this.strategyData.map((item)=><StrategyContainer data={item} selectedKey={this.state.selectedKey} setSelection={(name,from,to,window, pairData)=>this.setSelection(name,from,to,window, pairData)} />)}*/}
             </div>
         )
     }

@@ -53,7 +53,7 @@ class CandleChart extends Component{
             return new Date() 
         }
             
-        const xExtents = [ xAccessor(last(data)), xAccessor(data[data.length-data.length*0.7]) ]
+        const xExtents = [ xAccessor(last(data)), xAccessor(data[data.length-data.length*0.2]) ]
         
         // var timeRange= this.props.windowFrame===id.binance.candle_interval._1m?utcMinute:this.props.windowFrame===id.binance.candle_interval._1h?utcHour:utcDay
         var digit = parseInt( this.props.windowFrame.substring( 0, this.props.windowFrame.length - 1 ) )
@@ -62,7 +62,7 @@ class CandleChart extends Component{
         return(
             <div className={this.props.className} ref={container=>this.chartContaner=container} onClick={this.props.onClick}> 
                 <ChartCanvas 
-                    height={250}
+                    height={this.props.height || 250}
                     width={this.state.width}
                     ratio={3}
                     margin={{ left: 0, right: 70, top: 10, bottom: 30 }}
@@ -90,7 +90,7 @@ class CandleChart extends Component{
                             opacity={1}
                             />
                         <YAxis axisAt={value.isMobile?"left":"right"} orient={value.isMobile?"left":"right"} ticks={4} displayFormat={format(".2f")} />
-                        <XAxis axisAt={value.isMobile?"top":"bottom"} orient={value.isMobile?"top":"bottom"}/>
+                        <XAxis axisAt={value.isMobile?"top":"bottom"} orient={value.isMobile?"top":"bottom"} ticks={3}/>
                     </Chart>
                 </ChartCanvas>
             </div>

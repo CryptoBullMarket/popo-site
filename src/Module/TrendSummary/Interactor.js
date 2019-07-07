@@ -15,6 +15,9 @@ class Interactor {
             }
         }).then(response=>{
             this.presenter.stopLoading()
+            if( typeof response != "object" || !response.ok || response.status != 200 || response.status != 'OK' ) {
+                return
+            }
             response.json().then(json=>{
                 this.presenter.setTrendData(json[id.message])
                 if(json[id.message][id.trendSummary.trend].length>0){

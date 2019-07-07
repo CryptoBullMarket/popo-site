@@ -6,7 +6,23 @@ class Presenter{
         this.interactor=new Interactor(this)
     }
     setStrategyData(data){
-        this.script.strategyData = data
+        var list=[]
+        for(var i=0; i<Object.keys(data).length; i++){
+            const key = Object.keys(data)[i]
+            const item = Object.values(data)[i]
+            const timeFrame = key.split(":")[1]
+            const pairKey = key.split(":").pop()
+            const pair = { from: pairKey.substr( 1, pairKey.length - 4 ), to: pairKey.substr( pairKey.length -3, pairKey.length )}
+            list.push({
+                item: item,
+                timeFrame: timeFrame,
+                pair: pair
+            })
+        }
+        this.script.strategyData = list
+        this.script.setState({
+            chartData:list
+        })
     }
     setChartData(data, showWindow){
         var list=[]
@@ -27,7 +43,7 @@ class Presenter{
     }
 
     setSelectedKey( name, from, to, window, pairData ){
-        this.script.setSelection( name, from, to, window, pairData )
+        // this.script.setSelection( name, from, to, window, pairData )
         this.stopLoading()
     }
     startLoading(){
